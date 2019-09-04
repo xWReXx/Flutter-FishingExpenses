@@ -33,39 +33,28 @@ class TransactionList extends StatelessWidget {
         : ListView.builder(
         itemBuilder: (context, index) {
           return Card(
-            child: Row(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  margin: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 2,
-                    )),
-                  child: Text(
-                    '\$${transactions[index].price.toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.lightGreen
-                    ),
-                  ),
+            elevation: 5,
+            margin: EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 5
+            ),
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                child: Padding(
+                  padding: EdgeInsets.all(6), 
+                  child: FittedBox(
+                    child: Text('\$${transactions[index].price}')
+                  )
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      transactions[index].title,
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.title
-                    ),
-                    Text(
-                      DateFormat.yMMMd().format(transactions[index].date)
-                    )
-                ],)
-              ],
-            )
+              ),
+              title: Text(
+                transactions[index].title,
+                style: Theme.of(context).textTheme.title,
+              ),
+              subtitle: Text(DateFormat.yMMMd().format(transactions[index].date)),
+
+            ),
           );
         },
         itemCount: transactions.length,
